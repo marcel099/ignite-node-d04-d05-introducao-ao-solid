@@ -9,6 +9,45 @@
     }
   },
   "paths": {
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get a user by ID",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "id": "e27668d9-a9c7-4c2e-9f8b-95e63b7dbf32",
+                    "name": "John Doe",
+                    "email": "john_doe@gmail.com",
+                    "admin": false,
+                    "created_at": "2020-01-01T00:00:00.000Z",
+                    "updated_at": "2020-01-01T00:00:00.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": "User not found"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users": {
       "post": {
         "tags": ["User"],
@@ -36,7 +75,7 @@
         },
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -76,7 +115,7 @@
         "description": "Turn a user into a user with administration privileges",
         "responses": {
           "200": {
-            "description": "User turned into an administrator",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
