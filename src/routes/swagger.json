@@ -1,0 +1,11 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "\"Introduction to SOLID\" Challenge Documentation",
+    "description": "This is an API created in the goal of practicing SOLID principles",
+    "version": "1.0.0",
+    "contact": {
+      "email": "mar.lupatini@gmail.com"
+    }
+  }
+}
