@@ -13,6 +13,15 @@
       "get": {
         "tags": ["User"],
         "summary": "Get a user by ID",
+        "parameters": [{
+          "in": "path",
+          "name": "user_id",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": true
+        }],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -49,6 +58,65 @@
       }
     },
     "/users": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Lists all users",
+        "parameters": [{
+          "in": "header",
+          "name": "user_id",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  },
+                  "example": [
+                    {
+                      "id": "e27668d9-a9c7-4c2e-9f8b-95e63b7dbf32",
+                      "name": "John Doe",
+                      "email": "john_doe@gmail.com",
+                      "admin": false,
+                      "created_at": "2020-01-01T00:00:00.000Z",
+                      "updated_at": "2020-01-01T00:00:00.000Z"
+                    },
+                    {
+                      "id": "e27668d9-a9c7-4c2e-9f8b-95e63b7dbf32",
+                      "name": "Jane Doe",
+                      "email": "jane_doe@gmail.com",
+                      "admin": true,
+                      "created_at": "2020-02-01T00:00:00.000Z",
+                      "updated_at": "2020-02-02T00:00:00.000Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User not found or with invalid permissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": "User with invalid permissions"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": ["User"],
         "summary": "Creates a user",
@@ -113,6 +181,15 @@
         "tags": ["User"],
         "summary": "Turn a user into an administrator",
         "description": "Turn a user into a user with administration privileges",
+        "parameters": [{
+          "in": "path",
+          "name": "user_id",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": true
+        }],
         "responses": {
           "200": {
             "description": "Successful operation",
